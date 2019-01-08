@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
     let labelAnswer:UILabel = UILabel();
     
     override func viewDidLoad() {
@@ -16,6 +17,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         labelAnswer.text = "Here is the answer of the magic eight ball"
+        labelAnswer.backgroundColor = .white;
+        labelAnswer.textAlignment = .center;
+        labelAnswer.numberOfLines = 0;
         labelAnswer.isHidden = true;
     }
     
@@ -66,22 +70,25 @@ class ViewController: UIViewController {
         return colors[randomCol];
         
         //return colors[Int.random(in: 0 ..< colors.count)];
-    }
+    };
+    
     func updateUI(){
         //let labelAnswer:UILabel = UILabel();
         
-        labelAnswer.backgroundColor = .white;
         labelAnswer.textColor = randomColor();
+        labelAnswer.text = """
+            Here is the answer of the magic eight:
+            \(magicEightBall())
+            """;
+        labelAnswer.frame.origin = CGPoint(x: 20, y: 200.0);
         labelAnswer.numberOfLines = 0;
-        labelAnswer.textAlignment = .center;
-        labelAnswer.text = magicEightBall();
-        labelAnswer.frame.origin = CGPoint(x: 20, y: 200.0)
         labelAnswer.frame.size = labelAnswer.intrinsicContentSize;
         labelAnswer.frame.size = CGSize(width: view.frame.width - 40, height: labelAnswer.frame.height);
         labelAnswer.isHidden = false;
         view.addSubview(labelAnswer);
         
     };
+    
     @IBAction func userInput(_ sender: UITextField) {
         sender.resignFirstResponder();
         updateUI();
